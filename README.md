@@ -1,69 +1,90 @@
-# React + TypeScript + Vite
+# SPK Frontend (React + Vite + TailwindCSS)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ini adalah proyek frontend untuk aplikasi Sistem Pendukung Keputusan (SPK) yang dibangun menggunakan **React**, **Vite**, dan **Tailwind CSS**. Aplikasi ini terhubung dengan backend berbasis Express yang menyediakan data alternatif, kriteria, dan skor.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔧 Teknologi yang Digunakan
 
-## Expanding the ESLint configuration
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Axios](https://axios-http.com/) — untuk request API
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Instalasi
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+1. **Clone repositori ini**
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+git clone https://github.com/kamu/spk-react.git
+cd spk-react
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. **Install dependencies**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+npm install
 ```
+
+3. **Jalankan proyek**
+```bash
+npm run dev
+```
+
+## 🧪 Struktur Folder
+
+```bash
+spk-manajemen-react/
+├── eslint.config.js
+├── package.json
+├── package-lock.json
+├── public/
+│   └── vite.svg
+├── README.md
+├── src/
+│   ├── api/
+│   ├── App.tsx
+│   ├── assets/
+│   ├── components/
+│   ├── main.tsx
+│   ├── pages/
+│   ├── styles/
+│   └── vite-env.d.ts
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
+```
+
+## 🔗 Koneksi ke Backend
+`src/api/axios.ts`:
+
+```bash
+import axios from 'axios';
+
+const instance = axios.create({
+  baseURL: 'http://localhost:3000', // Ganti sesuai URL backend
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+export default instance;
+```
+
+## 📄 Fitur Utama
+
+- Melihat, menambahkan, mengubah, dan menghapus Kriteria
+- Melihat, menambahkan, mengubah, dan menghapus Alternatif
+- Menginput dan menampilkan Skor
+- Berbasis REST API
+- Styling modern dengan TailwindCSS
+
+## 📍 Catatan
+Pastikan backend kamu sudah berjalan di port yang sesuai (`localhost:3000` atau yang lain), dan endpointnya tersedia sebelum mengakses frontend ini.
+
+## 🙌 Kontribusi
+Pull request dan masukan selalu diterima! 😄  
+[Ryanz23](https://github.com/Ryanz23)
