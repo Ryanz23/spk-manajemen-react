@@ -55,6 +55,7 @@ spk-manajemen-react/
 │   ├── styles/
 │   └── vite-env.d.ts
 ├── tsconfig.app.json
+├── index.html
 ├── tsconfig.json
 ├── tsconfig.node.json
 └── vite.config.ts
