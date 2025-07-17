@@ -15,23 +15,25 @@ Ini adalah proyek frontend untuk aplikasi Sistem Pendukung Keputusan (SPK) yang 
 
 ## 🚀 Instalasi
 
-1. **Clone repositori ini**
+**1. Clone repositori ini**
 
 ```bash
 git clone https://github.com/kamu/spk-react.git
 cd spk-react
 ```
 
-2. **Install dependencies**
+**2. Install dependencies**
 
 ```bash
 npm install
 ```
 
-3. **Jalankan proyek**
+**3. Jalankan proyek**
 ```bash
 npm run dev
 ```
+
+---
 
 ## 🧪 Struktur Folder
 
@@ -58,8 +60,11 @@ spk-manajemen-react/
 └── vite.config.ts
 ```
 
+---
+
 ## 🔗 Koneksi ke Backend
-`src/api/axios.ts`:
+
+**1. Konfigurasi file `src/api/axios.ts`:**
 
 ```bash
 import axios from 'axios';
@@ -74,6 +79,14 @@ const instance = axios.create({
 export default instance;
 ```
 
+**2. Repository backend:**
+
+```bash
+https://github.com/Ryanz23/simple-backend-with-express
+```
+
+---
+
 ## 📄 Fitur Utama
 
 - Melihat, menambahkan, mengubah, dan menghapus Kriteria
@@ -82,9 +95,15 @@ export default instance;
 - Berbasis REST API
 - Styling modern dengan TailwindCSS
 
+---
+
 ## 📍 Catatan
+
 Pastikan backend kamu sudah berjalan di port yang sesuai (`localhost:3000` atau yang lain), dan endpointnya tersedia sebelum mengakses frontend ini.
 
+---
+
 ## 🙌 Kontribusi
+
 Pull request dan masukan selalu diterima! 😄  
 [Ryanz23](https://github.com/Ryanz23)
