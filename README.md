@@ -29,6 +29,7 @@ npm install
 ```
 
 **3. Jalankan proyek**
+
 ```bash
 npm run dev
 ```
