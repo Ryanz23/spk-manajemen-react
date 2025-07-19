@@ -1,9 +1,25 @@
-import React from 'react';
-import CriteriaList from '../components/CriteriaList';
-import AlternativeList from '../components/AlternativeList';
-import ScoreList from '../components/ScoreList';
+import React, { useState } from 'react';
+import CriteriaList from '@components/criteria/CriteriaList';
+import CriteriaForm from '@components/criteria/CriteriaForm';
+import ScoreForm from '@components/scores/ScoreForm';
+import ScoreList from '@components/scores/ScoreList';
+import AlternativeForm from '@components/alternatives/AlternativeForm';
+import AlternativeList from '@components/alternatives/AlternativeList';
 
 const HomePage: React.FC = () => {
+  const [editData, setEditData] = useState<{
+    id: string;
+    name: string;
+    weight: number;
+  } | null>(null);
+
+  const [refresh, setRefresh] = useState(false);
+
+  const handleSuccess = () => {
+    setRefresh(!refresh); // Trigger refresh list
+    setEditData(null); // Reset form
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-gray-100">
       {/* Header */}
@@ -29,7 +45,8 @@ const HomePage: React.FC = () => {
               </h2>
             </div>
             <div className="p-6">
-              <CriteriaList />
+              <CriteriaForm onSuccess={handleSuccess} editData={editData} />
+              <CriteriaList onEdit={setEditData} />
             </div>
           </div>
 
@@ -42,6 +59,7 @@ const HomePage: React.FC = () => {
               </h2>
             </div>
             <div className="p-6">
+              <AlternativeForm />
               <AlternativeList />
             </div>
           </div>
@@ -55,6 +73,7 @@ const HomePage: React.FC = () => {
               </h2>
             </div>
             <div className="p-6">
+              <ScoreForm />
               <ScoreList />
             </div>
           </div>
