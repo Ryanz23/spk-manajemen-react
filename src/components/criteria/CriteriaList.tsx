@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getCriteria, deleteCriterion } from '../api/criteria';
+import { getCriteria, deleteCriterion } from '@api/criteria';
 
 type Criterion = {
   id: string;
@@ -7,7 +7,11 @@ type Criterion = {
   weight: number;
 };
 
-const CriteriaList: React.FC = () => {
+interface Props {
+  onEdit: (data: Criterion) => void;
+}
+
+const CriteriaList: React.FC<Props> = ({ onEdit }) => {
   const [criteria, setCriteria] = useState<Criterion[]>([]);
 
   const loadCriteria = async () => {
@@ -35,7 +39,8 @@ const CriteriaList: React.FC = () => {
       {criteria.map((c) => (
         <div
           key={c.id}
-          className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-white transition-all duration-200 group"
+          onClick={() => onEdit(c)}
+          className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-white transition-all duration-200 group cursor-pointer"
         >
           <div className="flex justify-between items-start">
             <div className="flex-1">
@@ -45,7 +50,10 @@ const CriteriaList: React.FC = () => {
               <p className="text-sm text-gray-600 mt-1">Bobot: {c.weight}</p>
             </div>
             <button
-              onClick={() => handleDelete(c.id)}
+              onClick={(e) => {
+                e.stopPropagation(); // biar gak trigger edit saat klik delete
+                handleDelete(c.id);
+              }}
               className="ml-4 px-3 py-1 text-xs font-medium text-red-600 bg-red-50 rounded-full hover:bg-red-100 hover:text-red-700 transition-colors duration-200 opacity-0 group-hover:opacity-100"
             >
               Hapus

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getScores } from '../api/scores';
+import { getScores } from '@api/scores';
 
 type ScoreItem = {
   alternative_id: string;

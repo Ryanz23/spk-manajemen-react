@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getAlternatives, deleteAlternative } from '../api/alternatives';
+import { getAlternatives, deleteAlternative } from '@api/alternatives';
 
 type Alternative = {
   id: string;
