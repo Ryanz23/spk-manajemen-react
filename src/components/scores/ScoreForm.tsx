@@ -219,9 +219,9 @@ const ScoreForm: React.FC<Props> = ({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 mb-4">
       {/* Selection Section */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols-2 gap-2">
         {/* Criteria Selection */}
         <div className="border border-gray-300 rounded p-4">
           <h3 className="font-semibold mb-3 text-gray-700">Pilih Kriteria:</h3>
@@ -286,8 +286,8 @@ const ScoreForm: React.FC<Props> = ({
 
       {/* Score Input Section */}
       {selectedCriteria.length > 0 && selectedAlternatives.length > 0 ? (
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="border-t pt-6">
+        <form onSubmit={handleSubmit} className="space-y-2">
+          <div className="border-t pt-4">
             <h3 className="font-semibold mb-4 text-gray-700">Input Skor:</h3>
             <div className="overflow-x-auto">
               <table className="min-w-full border border-gray-300">
