@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CriteriaList from '@components/criteria/CriteriaList';
 import CriteriaForm from '@components/criteria/CriteriaForm';
 import ScoreForm from '@components/scores/ScoreForm';
 import ScoreList from '@components/scores/ScoreList';
 import AlternativeForm from '@components/alternatives/AlternativeForm';
 import AlternativeList from '@components/alternatives/AlternativeList';
+import { getCriteria } from '@api/criteria';
+import { getAlternatives } from '@api/alternatives';
+import { getScores } from '@api/scores';
 
 const HomePage: React.FC = () => {
+  interface Criterion {
+    id: string;
+    name: string;
+    weight: number;
+  }
+
+  interface Alternative {
+    id: string;
+    name: string;
+  }
+
   const [editData, setEditData] = useState<{
     id: string;
     name: string;
@@ -18,7 +32,71 @@ const HomePage: React.FC = () => {
   const handleSuccess = () => {
     setRefresh(!refresh); // Trigger refresh list
     setEditData(null); // Reset form
+    fetchCriteria();
+    fetchAlternatives();
   };
+
+  const [criteria, setCriteria] = useState<Criterion[]>([]);
+  const [alternatives, setAlternatives] = useState<Alternative[]>([]);
+
+  const fetchCriteria = async () => {
+    try {
+      const res = await getCriteria();
+      const data = res.data?.data ?? [];
+      setCriteria(Array.isArray(data) ? data : []);
+      return data;
+    } catch (error) {
+      console.error('Gagal memuat data kriteria:', error);
+      return [];
+    }
+  };
+
+  const fetchAlternatives = async () => {
+    try {
+      const res = await getAlternatives();
+      const data = res.data?.data ?? [];
+      setAlternatives(Array.isArray(data) ? data : []);
+      return data;
+    } catch (error) {
+      console.error('Gagal memuat data alternatif:', error);
+      return [];
+    }
+  };
+
+  const fetchExistingScores = async (
+    criteriaIds: string[],
+    alternativeIds: string[],
+  ) => {
+    try {
+      const res = await getScores(); // ambil semua skor
+      const scores = res.data?.data ?? [];
+
+      // Ubah menjadi format: { alternativeId: { criterionId: score } }
+      const result: Record<string, Record<string, number>> = {};
+
+      for (const score of scores) {
+        const altId = score.alternative_id;
+        const critId = score.criterion_id;
+
+        if (!alternativeIds.includes(altId) || !criteriaIds.includes(critId)) {
+          continue;
+        }
+
+        if (!result[altId]) result[altId] = {};
+        result[altId][critId] = score.score;
+      }
+
+      return result;
+    } catch (err) {
+      console.error('Gagal mengambil skor yang sudah ada', err);
+      return {};
+    }
+  };
+
+  useEffect(() => {
+    fetchCriteria();
+    fetchAlternatives();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-gray-100">
@@ -73,7 +151,13 @@ const HomePage: React.FC = () => {
               </h2>
             </div>
             <div className="p-6">
-              <ScoreForm />
+              <ScoreForm
+                availableCriteria={criteria}
+                availableAlternatives={alternatives}
+                onFetchCriteria={fetchCriteria}
+                onFetchAlternatives={fetchAlternatives}
+                onFetchExistingScores={fetchExistingScores}
+              />
               <ScoreList />
             </div>
           </div>
