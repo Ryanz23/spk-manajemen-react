@@ -45,7 +45,7 @@ export default function CriteriaForm({ onSuccess, editData }: Props) {
   return (
     <form onSubmit={handleSubmit} className="mb-4 space-y-2">
       <div>
-        <label className='block font-medium text-gray-700'>Nama Kriteria</label>
+        <label className="block font-medium text-gray-700">Nama Kriteria</label>
         <input
           type="text"
           className="mt-1 w-full border border-gray-300 p-2 rounded"
