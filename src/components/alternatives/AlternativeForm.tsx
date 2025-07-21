@@ -38,7 +38,9 @@ const AlternativeForm: React.FC<Props> = ({ onSuccess }) => {
   return (
     <form onSubmit={handleSubmit} className="mb-4 space-y-2">
       <div>
-        <label className="block font-medium text-gray-700">Nama Alternatif</label>
+        <label className="block font-medium text-gray-700">
+          Nama Alternatif
+        </label>
         <input
           type="text"
           value={form.name}
